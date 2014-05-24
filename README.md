@@ -12,7 +12,7 @@ _How do I, as a developer, start working on the project?_
 4. _Set your R working directory to your cloned repository_
 5. _Run GettingDataAssignment.R and make sure you get a tidy dataset_
 
-## Explenation
+## Explanation
 
 ### Code Layout
 
