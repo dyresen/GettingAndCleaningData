@@ -4,12 +4,12 @@
 #We will then reconsctruct the data into a data frame and return it. 
 readAndMergeData <- function() {
   #Read label names
-  lables <- read.table("features.txt", sep="")
+  lables <- read.table("UCI\ HAR\ Dataset/features.txt", sep="")
   
   #Read train data
-  tx <- read.table("train/X_train.txt")
-  ty <- read.table("train/y_train.txt")
-  tsub <- read.table("train/subject_train.txt")
+  tx <- read.table("UCI\ HAR\ Dataset/train/X_train.txt")
+  ty <- read.table("UCI\ HAR\ Dataset/train/y_train.txt")
+  tsub <- read.table("UCI\ HAR\ Dataset/train/subject_train.txt")
   
   #Apply lables on train data
   names(tx) <- as.character(lables[,2])
@@ -23,9 +23,9 @@ readAndMergeData <- function() {
   tx$lables <- ty$V1
   
   #Read test data
-  tey <- read.table("test/y_test.txt")
-  tex <- read.table("test/X_test.txt")
-  tesub <- read.table("test/subject_test.txt")
+  tey <- read.table("UCI\ HAR\ Dataset/test/y_test.txt")
+  tex <- read.table("UCI\ HAR\ Dataset/test/X_test.txt")
+  tesub <- read.table("UCI\ HAR\ Dataset/test/subject_test.txt")
   
   #Apply lables on test data
   names(tex) <- as.character(lables[,2])
@@ -47,7 +47,7 @@ readAndMergeData <- function() {
 #Rename and clean up variables. Activities will be renames as in the 
 # "activity_lables.txt" file as per default.
 #Variable names are downcased, illegal characters removed and abbrivations expanded for clearity. 
-rename <- function(aggregated, lablesFile="activity_labels.txt") {
+rename <- function(aggregated, lablesFile="UCI\ HAR\ Dataset/activity_labels.txt") {
   lables <- read.table(lablesFile)
   for (i in 1:nrow(aggregated)) { aggregated[i,88] <- as.character(lables[aggregated[i,88],2])}
   names(aggregated) <- tolower(names(aggregated))
@@ -81,5 +81,6 @@ aggregated <- crunch(data)
 
 #Clean it up, to have a tidy data set. 
 tidy <- rename(aggregated)
+write.table(tidy, file = "tidy.txt")
 
 
